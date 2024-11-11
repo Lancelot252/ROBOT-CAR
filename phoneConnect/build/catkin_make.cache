@@ -1,0 +1,2 @@
+phoneconnect
+-DCATKIN_DEVEL_PREFIX=/home/pi/SmartCar_Dir/SmartCar_1.1_beta/phoneconnect/devel -DCMAKE_INSTALL_PREFIX=/home/pi/SmartCar_Dir/SmartCar_1.1_beta/phoneconnect/install -G Unix Makefiles

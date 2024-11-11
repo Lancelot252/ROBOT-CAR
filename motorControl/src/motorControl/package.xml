@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+    <name>motorControl</name>
+    <version>0.1.0</version>
+
+    <maintainer email="zhaozhh25@mail2.sysu.edu.cn">zhao</maintainer>
+
+    <license>GPLv3</license>
+    <description>FOR INTERNAL USAGE ONLY, ALL RIGHTS RESERVED.</description>
+
+    <author email="zhaozhh25@mail2.sysu.edu.cn">zhao</author>
+
+    <buildtool_depend>catkin</buildtool_depend>
+
+    <build_depend>roscpp</build_depend>
+    <build_depend>geometry_msgs</build_depend>
+    <build_depend>ackermann_msgs</build_depend>
+
+    <run_depend>roscpp</run_depend>
+    <run_depend>geometry_msgs</run_depend>
+    <run_depend>ackermann_msgs</run_depend>
+    <run_depend>teb_local_planner_tutorials</run_depend>
+
+</package>

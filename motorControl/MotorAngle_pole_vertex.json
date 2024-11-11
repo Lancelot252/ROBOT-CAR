@@ -1,0 +1,274 @@
+{
+   "Encode" : {
+      "Index0" : {
+         "car" : {
+            "motor1" : 50017,
+            "motor2" : 54901,
+            "motor3" : 29931,
+            "motor4" : 33085,
+            "motor5" : 0,
+            "motor6" : 60709,
+            "motor7" : 36139,
+            "motor8" : 57691
+         },
+         "track" : {
+            "motor1" : 62858,
+            "motor2" : 8772,
+            "motor3" : 57907,
+            "motor4" : 50333,
+            "motor5" : 19090,
+            "motor6" : 44663,
+            "motor7" : 42833,
+            "motor8" : 55572
+         }
+      },
+      "Index1" : {
+         "car" : {
+            "motor1" : 50017,
+            "motor2" : 54901,
+            "motor3" : 29931,
+            "motor4" : 33085,
+            "motor5" : 0,
+            "motor6" : 60709,
+            "motor7" : 36139,
+            "motor8" : 57691
+         },
+         "track" : {
+            "motor1" : 62858,
+            "motor2" : 8772,
+            "motor3" : 57907,
+            "motor4" : 50333,
+            "motor5" : 19090,
+            "motor6" : 44663,
+            "motor7" : 42833,
+            "motor8" : 55572
+         }
+      },
+      "Index2" : {
+         "car" : {
+            "motor1" : 50017,
+            "motor2" : 54901,
+            "motor3" : 29931,
+            "motor4" : 33085,
+            "motor5" : 0,
+            "motor6" : 60709,
+            "motor7" : 36139,
+            "motor8" : 57691
+         },
+         "track" : {
+            "motor1" : 62858,
+            "motor2" : 8772,
+            "motor3" : 57907,
+            "motor4" : 50333,
+            "motor5" : 19090,
+            "motor6" : 44663,
+            "motor7" : 42833,
+            "motor8" : 55572
+         }
+      }
+   },
+   "Incurrent" : {
+      "Index0" : {
+         "car" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : -0.5478515625,
+            "motor8" : 0.7412109375
+         },
+         "track" : {
+            "motor1" : -5.02734375,
+            "motor2" : -1.0634765625,
+            "motor3" : -0.9345703125,
+            "motor4" : -1.0634765625,
+            "motor5" : -6.05859375,
+            "motor6" : -16.177734375,
+            "motor7" : 0.515625,
+            "motor8" : 1.095703125
+         }
+      },
+      "Index1" : {
+         "car" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : -0.5478515625,
+            "motor8" : 0.7412109375
+         },
+         "track" : {
+            "motor1" : -5.02734375,
+            "motor2" : -1.0634765625,
+            "motor3" : -0.9345703125,
+            "motor4" : -1.0634765625,
+            "motor5" : -6.05859375,
+            "motor6" : -16.177734375,
+            "motor7" : 0.515625,
+            "motor8" : 1.095703125
+         }
+      },
+      "Index2" : {
+         "car" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : -0.5478515625,
+            "motor8" : 0.7412109375
+         },
+         "track" : {
+            "motor1" : -5.02734375,
+            "motor2" : -1.0634765625,
+            "motor3" : -0.9345703125,
+            "motor4" : -1.0634765625,
+            "motor5" : -6.05859375,
+            "motor6" : -16.177734375,
+            "motor7" : 0.515625,
+            "motor8" : 1.095703125
+         }
+      }
+   },
+   "MotorAngle" : {
+      "Index0" : {
+         "car" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         },
+         "track" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         }
+      },
+      "Index1" : {
+         "car" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         },
+         "track" : {
+            "motor1" : -1471,
+            "motor2" : 4818,
+            "motor3" : -4190,
+            "motor4" : -8351,
+            "motor5" : 10486,
+            "motor6" : -11465,
+            "motor7" : -12471,
+            "motor8" : -5473
+         }
+      },
+      "Index2" : {
+         "car" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         },
+         "track" : {
+            "motor1" : -1471,
+            "motor2" : 4818,
+            "motor3" : -4190,
+            "motor4" : -8351,
+            "motor5" : 0,
+            "motor6" : -11465,
+            "motor7" : -12471,
+            "motor8" : -5473
+         }
+      }
+   },
+   "Speed" : {
+      "Index0" : {
+         "car" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         },
+         "track" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         }
+      },
+      "Index1" : {
+         "car" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         },
+         "track" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         }
+      },
+      "Index2" : {
+         "car" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         },
+         "track" : {
+            "motor1" : 0,
+            "motor2" : 0,
+            "motor3" : 0,
+            "motor4" : 0,
+            "motor5" : 0,
+            "motor6" : 0,
+            "motor7" : 0,
+            "motor8" : 0
+         }
+      }
+   }
+}
