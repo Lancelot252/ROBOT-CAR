@@ -1,0 +1,8 @@
+prefix=/home/pi/ros_connect/devel
+
+Name: udp_server
+Description: Description of udp_server
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
