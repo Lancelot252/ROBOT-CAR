@@ -33,7 +33,7 @@ bool readWiFiConfig(std::string& ssid, std::string& password) {
     while (std::getline(file, line)) {
         if (line.find("ssid") != std::string::npos) {
             ssid = line.substr(line.find('=') + 1);
-        } else if (line.find("password") != std::string::npos) {
+        } else if (line.find("psk") != std::string::npos) {
             password = line.substr(line.find('=') + 1);
         }
     }
