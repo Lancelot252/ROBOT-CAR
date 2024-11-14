@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Robot Control</string>
+    <string name="aboutUs">About Us</string>
+    <string name="no_find_device">NO device has been searched!</string>
+    <string name="searching">Searching...</string>
+    <string name="device_list">Device list:</string>
+    <string name="ok">OK</string>
+
+    <string name="app_version">App Version:</string>
+
+    <string name="operation_tips">Tips:Short press the device will enter video mode,and in the local wireless connection mode,long press it will show IP address and ID information of the device.</string>
+
+    <string name="stop">Stop</string>
+    <string name="forward">Forward</string>
+    <string name="backward">Backward</string>
+    <string name="move_left">Left</string>
+    <string name="move_right">Right</string>
+    <string name="turn_left">Turn Left</string>
+    <string name="turn_right">Turn Right</string>
+</resources>

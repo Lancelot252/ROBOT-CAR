@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">机体控制</string>
+    <string name="aboutUs">关于我们</string>
+    <string name="no_find_device">未搜索到设备</string>
+    <string name="searching">搜索中...</string>
+    <string name="device_list">设备列表:</string>
+    <string name="ok">好的</string>
+
+    <string name="app_version">软件版本:</string>
+
+    <string name="operation_tips">说明:短按搜索到的设备可以进入视频观看模式，局域网连接模式下长按可查询设备IP地址和ID信息。</string>
+
+    <string name="stop">停止</string>
+    <string name="forward">前进</string>
+    <string name="backward">后退</string>
+    <string name="move_left">左移</string>
+    <string name="move_right">右移</string>
+    <string name="turn_left">左转</string>
+    <string name="turn_right">右转</string>
+</resources>
