@@ -6,6 +6,8 @@
 #include <cstring>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include <httplib.h>
+#include <nlohmann/json.hpp>
 
 // 获取 CPU 序列号
 std::string getCpuSerialNumber() {
@@ -26,10 +28,60 @@ std::string getCpuSerialNumber() {
     return serial_num;
 }
 
+// 处理接收到的命令并发布 ROS 话题
+void handleCommand(const std::string& requestBody, ros::Publisher& publisher) {
+    try {
+        nlohmann::json jsonObj = nlohmann::json::parse(requestBody);
+        std::string method = jsonObj["method"];
+        int id = jsonObj["id"];
+        nlohmann::json params = jsonObj["params"];
+
+        std_msgs::String msg;
+        //msg.data = jsonObj.dump();  // 将 JSON 对象转换为字符串
+
+        if (method == "SetMovementAngle")
+        {
+            switch (params[0])
+            {
+            case 90://前进
+                msg.data = "forward";
+                break;
+            
+            case 270://后退
+                msg.data = "backward";
+                break;
+
+            case 180://左转
+                msg.data = "left";
+                break;
+
+            case 360://右转
+                msg.data = "right";
+                break;
+
+            case -1://停止
+                msg.data = "stop";
+                break;
+            
+            default:
+                break;
+            }
+        }
+        
+
+        publisher.publish(msg);  // 发布 ROS 话题
+    } catch (const std::exception& e) {
+        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
+    }
+}
+
 int main(int argc, char** argv) {
     // 初始化 ROS
     ros::init(argc, argv, "udp_server");
     ros::NodeHandle nh;
+
+    // 创建 ROS 发布者
+    ros::Publisher publisher = nh.advertise<std_msgs::String>("phonejoy", 1000);
 
     // 初始化 UDP 套接字
     int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -74,7 +126,7 @@ int main(int argc, char** argv) {
         ROS_INFO("Received message: %s", msg.c_str());
 
         // 如果接收到 "LOBOT_NET_DISCOVER" 消息，则发送响应
-        if (msg == "LOBOT_NET_DISCOVER") {
+        /*if (msg == "LOBOT_NET_DISCOVER") {
             std::string response = robot_type + ":" + sn + "\n";
             ssize_t send_len = sendto(sockfd, response.c_str(), response.size(), 0, (struct sockaddr *)&client_addr, addr_len);
             if (send_len < 0) {
@@ -82,7 +134,9 @@ int main(int argc, char** argv) {
             } else {
                 ROS_INFO("Sent response: %s", response.c_str());
             }
-        }
+        }*/
+        // 处理接收到的 JSON 数据并发布 ROS 话题
+        handleCommand(msg, publisher);
     }
 
     // 关闭套接字
