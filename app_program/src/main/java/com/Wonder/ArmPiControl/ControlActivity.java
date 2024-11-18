@@ -96,7 +96,7 @@ public class ControlActivity extends Activity {
                     int tag = Integer.parseInt((String)v.getTag());
                     int[] data = new int[1];
                     switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
+                        case MotionEvent.ACTION_DOWN://按下  0:前进 1:后退 2:左移 3:右移
                             switch (tag)
                             {
                                 case 0://Forward
@@ -114,7 +114,7 @@ public class ControlActivity extends Activity {
                             }
                             postRpc("SetMovementAngle", 1, data, null, null);
                             break;
-                        case MotionEvent.ACTION_MOVE:
+                        case MotionEvent.ACTION_MOVE://移动
                             break;
                         case MotionEvent.ACTION_UP:
                         case MotionEvent.ACTION_CANCEL:
