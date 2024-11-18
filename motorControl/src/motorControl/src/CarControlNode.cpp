@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     //
     RobotCarMode robot{Car.getUsbCan()};
 
-    ros::Subscriber subJoy = n.subscribe("joy", 1, &RobotCarMode::joyNodeHandler,&robot);
+    ros::Subscriber subJoy = n.subscribe("phonejoy", 1, &RobotCarMode::joyNodeHandler,&robot);
 
     //  做测试使用
     //ros::Subscriber subCmdVel = n.subscribe("cmd_vel", 1, &RobotCarMode::cmdVelHandler,&robot);

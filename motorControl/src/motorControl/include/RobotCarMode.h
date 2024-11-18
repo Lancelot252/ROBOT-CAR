@@ -123,17 +123,17 @@ class RobotCarMode{
             //w = msg->axes[2]; // right rocker, horizontal, from left to right [1 -1]
 
 	    //start
-	        if(BUTTON_R2){
+	        if(msg.data == "forward"){
                 Vx=0.5;
-            }else if(BUTTON_L2){
+            }else if(msg.data == "backward"){
                 Vx=-0.5;
             }else{
                 Vx=0;
             }
 
-            if(BUTTON_L1){
+            if(msg.data == "left"){
                 Vy=-0.5;
-            }else if(BUTTON_R1){
+            }else if(msg.data == "right"){
                 Vy=0.5;
             }else{
 		        Vy=0;
@@ -148,7 +148,7 @@ class RobotCarMode{
             }
 	    //end（此处将控制改为按键）
 	    
-            if (BUTTON_START){
+            if (msg.data == "stop"){
                 next_command = COMMAND::STOP;
             }
             else if (BUTTON_Y){
