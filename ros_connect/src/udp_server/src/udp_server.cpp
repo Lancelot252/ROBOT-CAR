@@ -45,22 +45,27 @@ void handleCommand(const std::string& requestBody, ros::Publisher& publisher) {
             {
             case 90://前进
                 msg.data = "forward";
+                ROS_INFO("forward");
                 break;
             
             case 270://后退
                 msg.data = "backward";
+                ROS_INFO("backward");
                 break;
 
             case 180://左转
                 msg.data = "left";
+                ROS_INFO("left");
                 break;
 
             case 360://右转
                 msg.data = "right";
+                ROS_INFO("right");
                 break;
 
             case -1://停止
                 msg.data = "stop";
+                ROS_INFO("stop");
                 break;
             
             default:
