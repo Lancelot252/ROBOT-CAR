@@ -144,8 +144,26 @@ void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
                                 default:
                                     msg.data = "unknown";
                             }
+                        
                             publisher.publish(msg);
-                            ROS_INFO("Published movement command: %s", msg.data.c_str());
+                            ROS_INFO("Published movement command: %s", msg.data);
+                        }
+                        if(root["method"]=="SetBrushMotor"){
+                            std_msgs::String msg;
+                            int angle = root["params"][1].asInt();
+                            ROS_INFO("%d",angle);
+                            switch(angle){
+                                case -100:
+                                    msg.data = "turnleft";
+                                    break;
+                                case 100:
+                                    msg.data = "turnright";
+                                    break;
+                                default:
+                                    msg.data = "unknown";
+                            }
+                            publisher.publish(msg);
+                            ROS_INFO("Published movement command: %s", msg.data);
                         }
 
                         // 返回 JSON-RPC 响应
