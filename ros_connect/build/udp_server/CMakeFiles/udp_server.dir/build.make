@@ -96,6 +96,7 @@ udp_server_EXTERNAL_OBJECTS =
 /home/pi/ros_connect/devel/lib/udp_server/udp_server: /usr/lib/aarch64-linux-gnu/libboost_system.so.1.71.0
 /home/pi/ros_connect/devel/lib/udp_server/udp_server: /usr/lib/aarch64-linux-gnu/libboost_thread.so.1.71.0
 /home/pi/ros_connect/devel/lib/udp_server/udp_server: /usr/lib/aarch64-linux-gnu/libconsole_bridge.so.0.4
+/home/pi/ros_connect/devel/lib/udp_server/udp_server: /usr/lib/aarch64-linux-gnu/libjsoncpp.so
 /home/pi/ros_connect/devel/lib/udp_server/udp_server: udp_server/CMakeFiles/udp_server.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/pi/ros_connect/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/pi/ros_connect/devel/lib/udp_server/udp_server"
 	cd /home/pi/ros_connect/build/udp_server && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/udp_server.dir/link.txt --verbose=$(VERBOSE)

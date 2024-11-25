@@ -4,142 +4,207 @@
 #include <fstream>
 #include <string>
 #include <cstring>
-#include <unistd.h>
+#include <thread>
+#include <boost/asio.hpp>
+#include <jsoncpp/json/json.h>  // JsonCpp库
 #include <arpa/inet.h>
-#include <httplib.h>
-#include <nlohmann/json.hpp>
 
-// 获取 CPU 序列号
+using boost::asio::ip::tcp;
+
+// 获取CPU序列号
 std::string getCpuSerialNumber() {
     std::ifstream cpuinfo("/proc/cpuinfo");
-    std::string line;
-    std::string serial_num;
+    std::string line, serial_num;
     while (std::getline(cpuinfo, line)) {
-        if (line.find("Serial") == 0) {  // 查找包含 'Serial' 的行
-            serial_num = line.substr(line.find(":") + 2);  // 获取序列号
+        if (line.find("Serial") == 0) {
+            serial_num = line.substr(line.find(":") + 2);
             break;
         }
     }
     if (!serial_num.empty()) {
         std::reverse(serial_num.begin(), serial_num.end());
-        serial_num = serial_num.substr(0, 16);  // 取反并只保留16位
+        serial_num = serial_num.substr(0, 16);
         std::transform(serial_num.begin(), serial_num.end(), serial_num.begin(), ::toupper);
     }
     return serial_num;
 }
 
-// 处理接收到的命令并发布 ROS 话题
-void handleCommand(const std::string& requestBody, ros::Publisher& publisher) {
-    try {
-        nlohmann::json jsonObj = nlohmann::json::parse(requestBody);
-        std::string method = jsonObj["method"];
-        int id = jsonObj["id"];
-        nlohmann::json params = jsonObj["params"];
+// UDP设备发现线程函数
+void udpDeviceDiscovery(int port, const std::string& robot_type, const std::string& serial_number) {
+    int udp_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+    if (udp_sockfd < 0) {
+        ROS_ERROR("Failed to create UDP socket!");
+        return;
+    }
 
-        std_msgs::String msg;
-        //msg.data = jsonObj.dump();  // 将 JSON 对象转换为字符串
+    struct sockaddr_in server_addr, client_addr;
+    memset(&server_addr, 0, sizeof(server_addr));
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_addr.s_addr = INADDR_ANY;
+    server_addr.sin_port = htons(port);
 
-        if (method == "SetMovementAngle")
-        {
-            switch (params[0])
-            {
-            case 90://前进
-                msg.data = "forward";
-                break;
-            
-            case 270://后退
-                msg.data = "backward";
-                break;
+    if (bind(udp_sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
+        ROS_ERROR("Failed to bind UDP socket!");
+        close(udp_sockfd);
+        return;
+    }
 
-            case 180://左转
-                msg.data = "left";
-                break;
+    ROS_INFO("UDP Device Discovery listening on port %d", port);
 
-            case 360://右转
-                msg.data = "right";
-                break;
+    char buffer[1024];
+    socklen_t addr_len = sizeof(client_addr);
+    while (ros::ok()) {
+        ssize_t recv_len = recvfrom(udp_sockfd, buffer, sizeof(buffer) - 1, 0, (struct sockaddr*)&client_addr, &addr_len);
+        if (recv_len > 0) {
+            buffer[recv_len] = '\0';
+            std::string msg(buffer);
 
-            case -1://停止
-                msg.data = "stop";
-                break;
-            
-            default:
-                break;
+            if (msg == "LOBOT_NET_DISCOVER") {
+                std::string response = robot_type + ":" + serial_number + "\n";
+                sendto(udp_sockfd, response.c_str(), response.size(), 0, (struct sockaddr*)&client_addr, addr_len);
+                ROS_INFO("Sent UDP response: %s", response.c_str());
             }
         }
-        
+    }
 
-        publisher.publish(msg);  // 发布 ROS 话题
-    } catch (const std::exception& e) {
-        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
+    close(udp_sockfd);
+}
+
+// 处理 JSON-RPC 请求
+void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
+    try {
+        boost::asio::io_service io_service;
+        tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), tcp_port));
+
+        ROS_INFO("JSON-RPC Server listening on TCP port %d", tcp_port);
+
+        while (ros::ok()) {
+            tcp::socket socket(io_service);
+            acceptor.accept(socket);
+
+            ROS_INFO("TCP Client connected!");
+
+            try {
+                // 接收数据
+                boost::asio::streambuf buffer;
+                size_t bytes_transferred = boost::asio::read_until(socket, buffer, "\n");
+
+                if (bytes_transferred == 0) {
+                    ROS_WARN("Received empty message from client.");
+                    continue;
+                }
+
+                std::istream input(&buffer);
+                std::string request((std::istreambuf_iterator<char>(input)), std::istreambuf_iterator<char>());
+
+                // 打印接收到的原始数据
+                ROS_INFO_STREAM("Raw data received: " << request);
+
+                // 解析 JSON
+                // Json::Value root;
+                // Json::CharReaderBuilder readerBuilder;
+                // std::string errs;
+                // std::istringstream requestStream(request);
+                // if (!Json::parseFromStream(readerBuilder, requestStream, &root, &errs)) {
+                //     ROS_WARN_STREAM("Failed to parse JSON: " << errs);
+                //     continue;
+                // }
+
+                void parseJsonRequest(const std::string& request) {
+                // 找到 JSON 数据的起始和结束位置
+    size_t jsonStartPos = request.find("{");
+    size_t jsonEndPos = request.rfind("}");
+
+    if (jsonStartPos != std::string::npos && jsonEndPos != std::string::npos) {
+        // 截取 JSON 字符串
+        std::string jsonStr = request.substr(jsonStartPos, jsonEndPos - jsonStartPos + 1);
+
+        // 解析 JSON
+        Json::Value root;
+        Json::CharReaderBuilder readerBuilder;
+        std::string errs;
+        std::istringstream requestStream(jsonStr);
+        if (!Json::parseFromStream(readerBuilder, requestStream, &root, &errs)) {
+            ROS_WARN_STREAM("Failed to parse JSON: " << errs);
+        } else {
+            // 输出解析后的 JSON
+            ROS_INFO_STREAM("Parsed JSON: " << root);
+        }
+    } else {
+        ROS_WARN_STREAM("No valid JSON found in the request.");
     }
 }
 
+
+
+                // 打印接收到的 JSON-RPC 请求
+                ROS_INFO_STREAM("Received JSON-RPC Request: " << root.toStyledString());
+
+                // 根据请求发布ROS话题
+                if (root["method"] == "SetMovementAngle") {
+                    int angle = root["params"][0].asInt();
+                    std_msgs::String msg;
+                    switch (angle) {
+                        case 90:
+                            msg.data = "forward";
+                            break;
+                        case 270:
+                            msg.data = "backward";
+                            break;
+                        case 180:
+                            msg.data = "left";
+                            break;
+                        case 360:
+                            msg.data = "right";
+                            break;
+                        case -1:
+                            msg.data = "stop";
+                            break;
+                        default:
+                            msg.data = "unknown";
+                    }
+                    publisher.publish(msg);
+                    ROS_INFO("Published movement command: %s", msg.data.c_str());
+                }
+
+                // 返回 JSON-RPC 响应
+                Json::Value response;
+                response["jsonrpc"] = "2.0";
+                response["id"] = root["id"];
+                response["result"] = "Success";
+
+                std::string responseStr = response.toStyledString();
+                boost::asio::write(socket, boost::asio::buffer(responseStr + "\n"));
+            } catch (std::exception& e) {
+                ROS_ERROR_STREAM("Error handling JSON-RPC request: " << e.what());
+            }
+        }
+    } catch (std::exception& e) {
+        ROS_ERROR_STREAM("Error starting JSON-RPC server: " << e.what());
+    }
+}
+
+
 int main(int argc, char** argv) {
     // 初始化 ROS
-    ros::init(argc, argv, "udp_server");
+    ros::init(argc, argv, "json_rpc_server");
     ros::NodeHandle nh;
 
     // 创建 ROS 发布者
     ros::Publisher publisher = nh.advertise<std_msgs::String>("phonejoy", 1000);
 
-    // 初始化 UDP 套接字
-    int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sockfd < 0) {
-        ROS_ERROR("Failed to create socket!");
-        return 1;
-    }
-
-    std::string host = "0.0.0.0";
-    int port = 9027;
+    // 获取 CPU 序列号
+    std::string serial_number = getCpuSerialNumber();
     std::string robot_type = "SPIDER";
-    std::string sn = getCpuSerialNumber();
 
-    struct sockaddr_in server_addr, client_addr;
-    memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;
-    server_addr.sin_addr.s_addr = INADDR_ANY;  // 绑定到所有网络接口
-    server_addr.sin_port = htons(port);
+    // 启动 UDP 设备发现线程
+    std::thread udp_thread(udpDeviceDiscovery, 9027, robot_type, serial_number);
 
-    // 绑定套接字
-    if (bind(sockfd, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
-        ROS_ERROR("Failed to bind socket!");
-        close(sockfd);
-        return 1;
-    }
+    // 主线程处理 JSON-RPC 请求
+    handleJsonRpcRequests(9030, publisher);
 
-    char buffer[1024];
-    socklen_t addr_len = sizeof(client_addr);
+    // 等待 UDP 线程结束
+    udp_thread.join();
 
-    ROS_INFO("Server listening on %s:%d", host.c_str(), port);
-
-    while (ros::ok()) {
-        ssize_t recv_len = recvfrom(sockfd, buffer, sizeof(buffer) - 1, 0, (struct sockaddr *)&client_addr, &addr_len);
-        if (recv_len < 0) {
-            ROS_ERROR("Error receiving data!");
-            continue;
-        }
-
-        buffer[recv_len] = '\0';  // Null-terminate the received data
-        std::string msg(buffer);
-
-        ROS_INFO("Received message: %s", msg.c_str());
-
-        // 如果接收到 "LOBOT_NET_DISCOVER" 消息，则发送响应
-        /*if (msg == "LOBOT_NET_DISCOVER") {
-            std::string response = robot_type + ":" + sn + "\n";
-            ssize_t send_len = sendto(sockfd, response.c_str(), response.size(), 0, (struct sockaddr *)&client_addr, addr_len);
-            if (send_len < 0) {
-                ROS_ERROR("Error sending response!");
-            } else {
-                ROS_INFO("Sent response: %s", response.c_str());
-            }
-        }*/
-        // 处理接收到的 JSON 数据并发布 ROS 话题
-        handleCommand(msg, publisher);
-    }
-
-    // 关闭套接字
-    close(sockfd);
     return 0;
 }

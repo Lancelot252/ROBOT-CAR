@@ -182,6 +182,21 @@ udp_server/fast:
 	cd /home/pi/ros_connect/build && $(MAKE) -f udp_server/CMakeFiles/udp_server.dir/build.make udp_server/CMakeFiles/udp_server.dir/build
 .PHONY : udp_server/fast
 
+# Convenience name for target.
+udp_server/CMakeFiles/udp_server_node.dir/rule:
+	cd /home/pi/ros_connect/build && $(MAKE) -f CMakeFiles/Makefile2 udp_server/CMakeFiles/udp_server_node.dir/rule
+.PHONY : udp_server/CMakeFiles/udp_server_node.dir/rule
+
+# Convenience name for target.
+udp_server_node: udp_server/CMakeFiles/udp_server_node.dir/rule
+
+.PHONY : udp_server_node
+
+# fast build rule for target.
+udp_server_node/fast:
+	cd /home/pi/ros_connect/build && $(MAKE) -f udp_server/CMakeFiles/udp_server_node.dir/build.make udp_server/CMakeFiles/udp_server_node.dir/build
+.PHONY : udp_server_node/fast
+
 src/udp_server.o: src/udp_server.cpp.o
 
 .PHONY : src/udp_server.o
@@ -189,6 +204,7 @@ src/udp_server.o: src/udp_server.cpp.o
 # target to build an object file
 src/udp_server.cpp.o:
 	cd /home/pi/ros_connect/build && $(MAKE) -f udp_server/CMakeFiles/udp_server.dir/build.make udp_server/CMakeFiles/udp_server.dir/src/udp_server.cpp.o
+	cd /home/pi/ros_connect/build && $(MAKE) -f udp_server/CMakeFiles/udp_server_node.dir/build.make udp_server/CMakeFiles/udp_server_node.dir/src/udp_server.cpp.o
 .PHONY : src/udp_server.cpp.o
 
 src/udp_server.i: src/udp_server.cpp.i
@@ -198,6 +214,7 @@ src/udp_server.i: src/udp_server.cpp.i
 # target to preprocess a source file
 src/udp_server.cpp.i:
 	cd /home/pi/ros_connect/build && $(MAKE) -f udp_server/CMakeFiles/udp_server.dir/build.make udp_server/CMakeFiles/udp_server.dir/src/udp_server.cpp.i
+	cd /home/pi/ros_connect/build && $(MAKE) -f udp_server/CMakeFiles/udp_server_node.dir/build.make udp_server/CMakeFiles/udp_server_node.dir/src/udp_server.cpp.i
 .PHONY : src/udp_server.cpp.i
 
 src/udp_server.s: src/udp_server.cpp.s
@@ -207,6 +224,7 @@ src/udp_server.s: src/udp_server.cpp.s
 # target to generate assembly for a file
 src/udp_server.cpp.s:
 	cd /home/pi/ros_connect/build && $(MAKE) -f udp_server/CMakeFiles/udp_server.dir/build.make udp_server/CMakeFiles/udp_server.dir/src/udp_server.cpp.s
+	cd /home/pi/ros_connect/build && $(MAKE) -f udp_server/CMakeFiles/udp_server_node.dir/build.make udp_server/CMakeFiles/udp_server_node.dir/src/udp_server.cpp.s
 .PHONY : src/udp_server.cpp.s
 
 # Help Target
@@ -223,6 +241,7 @@ help:
 	@echo "... test"
 	@echo "... install/local"
 	@echo "... udp_server"
+	@echo "... udp_server_node"
 	@echo "... src/udp_server.o"
 	@echo "... src/udp_server.i"
 	@echo "... src/udp_server.s"

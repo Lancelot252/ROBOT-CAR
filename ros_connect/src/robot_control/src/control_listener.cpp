@@ -105,7 +105,7 @@ int main(int argc, char **argv)
         ROS_INFO("Received data: %s", received_data.c_str());
 
         // 处理接收到的指令
-        processCommand(received_data,sockfd,client_addr,client_addr);
+        processCommand(received_data,sockfd,client_addr,sockaddr_in);
         // 保证ROS节点在运行
         ros::spinOnce();
     }

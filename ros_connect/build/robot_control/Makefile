@@ -183,21 +183,6 @@ std_msgs_generate_messages_py/fast:
 .PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
-robot_control/CMakeFiles/control_listener.dir/rule:
-	cd /home/pi/ros_connect/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/control_listener.dir/rule
-.PHONY : robot_control/CMakeFiles/control_listener.dir/rule
-
-# Convenience name for target.
-control_listener: robot_control/CMakeFiles/control_listener.dir/rule
-
-.PHONY : control_listener
-
-# fast build rule for target.
-control_listener/fast:
-	cd /home/pi/ros_connect/build && $(MAKE) -f robot_control/CMakeFiles/control_listener.dir/build.make robot_control/CMakeFiles/control_listener.dir/build
-.PHONY : control_listener/fast
-
-# Convenience name for target.
 robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
 	cd /home/pi/ros_connect/build && $(MAKE) -f CMakeFiles/Makefile2 robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : robot_control/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
@@ -407,33 +392,6 @@ rosgraph_msgs_generate_messages_py/fast:
 	cd /home/pi/ros_connect/build && $(MAKE) -f robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make robot_control/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
-src/control_listener.o: src/control_listener.cpp.o
-
-.PHONY : src/control_listener.o
-
-# target to build an object file
-src/control_listener.cpp.o:
-	cd /home/pi/ros_connect/build && $(MAKE) -f robot_control/CMakeFiles/control_listener.dir/build.make robot_control/CMakeFiles/control_listener.dir/src/control_listener.cpp.o
-.PHONY : src/control_listener.cpp.o
-
-src/control_listener.i: src/control_listener.cpp.i
-
-.PHONY : src/control_listener.i
-
-# target to preprocess a source file
-src/control_listener.cpp.i:
-	cd /home/pi/ros_connect/build && $(MAKE) -f robot_control/CMakeFiles/control_listener.dir/build.make robot_control/CMakeFiles/control_listener.dir/src/control_listener.cpp.i
-.PHONY : src/control_listener.cpp.i
-
-src/control_listener.s: src/control_listener.cpp.s
-
-.PHONY : src/control_listener.s
-
-# target to generate assembly for a file
-src/control_listener.cpp.s:
-	cd /home/pi/ros_connect/build && $(MAKE) -f robot_control/CMakeFiles/control_listener.dir/build.make robot_control/CMakeFiles/control_listener.dir/src/control_listener.cpp.s
-.PHONY : src/control_listener.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -445,7 +403,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... test"
 	@echo "... std_msgs_generate_messages_py"
-	@echo "... control_listener"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_eus"
@@ -463,9 +420,6 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... src/control_listener.o"
-	@echo "... src/control_listener.i"
-	@echo "... src/control_listener.s"
 .PHONY : help
 
 

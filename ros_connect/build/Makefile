@@ -298,19 +298,6 @@ std_msgs_generate_messages_py/fast:
 .PHONY : std_msgs_generate_messages_py/fast
 
 #=============================================================================
-# Target rules for targets named control_listener
-
-# Build rule for target.
-control_listener: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 control_listener
-.PHONY : control_listener
-
-# fast build rule for target.
-control_listener/fast:
-	$(MAKE) -f robot_control/CMakeFiles/control_listener.dir/build.make robot_control/CMakeFiles/control_listener.dir/build
-.PHONY : control_listener/fast
-
-#=============================================================================
 # Target rules for targets named std_msgs_generate_messages_nodejs
 
 # Build rule for target.
@@ -505,6 +492,19 @@ udp_server/fast:
 	$(MAKE) -f udp_server/CMakeFiles/udp_server.dir/build.make udp_server/CMakeFiles/udp_server.dir/build
 .PHONY : udp_server/fast
 
+#=============================================================================
+# Target rules for targets named udp_server_node
+
+# Build rule for target.
+udp_server_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 udp_server_node
+.PHONY : udp_server_node
+
+# fast build rule for target.
+udp_server_node/fast:
+	$(MAKE) -f udp_server/CMakeFiles/udp_server_node.dir/build.make udp_server/CMakeFiles/udp_server_node.dir/build
+.PHONY : udp_server_node/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -528,7 +528,6 @@ help:
 	@echo "... gtest_main"
 	@echo "... gtest"
 	@echo "... std_msgs_generate_messages_py"
-	@echo "... control_listener"
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_eus"
@@ -544,6 +543,7 @@ help:
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
 	@echo "... udp_server"
+	@echo "... udp_server_node"
 .PHONY : help
 
 

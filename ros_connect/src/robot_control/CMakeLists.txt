@@ -203,8 +203,9 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
-add_executable(control_listener src/control_listener.cpp)
 
-target_link_libraries(control_listener
-  ${catkin_LIBRARIES}
-)
+#add_executable(control_listener src/control_listener.cpp)
+
+#target_link_libraries(control_listener
+#  ${catkin_LIBRARIES}
+#)
