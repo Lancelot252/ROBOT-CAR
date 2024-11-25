@@ -1,8 +1,8 @@
-# Install script for directory: /home/pi/ros_connect/src
+# Install script for directory: /home/pi/ROBOT-CAR/ros_connect/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/pi/ros_connect/install")
+  set(CMAKE_INSTALL_PREFIX "/home/pi/ROBOT-CAR/ros_connect/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -49,90 +49,90 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pi/ros_connect/install/_setup_util.py")
+   "/home/pi/ROBOT-CAR/ros_connect/install/_setup_util.py")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pi/ros_connect/install" TYPE PROGRAM FILES "/home/pi/ros_connect/build/catkin_generated/installspace/_setup_util.py")
+file(INSTALL DESTINATION "/home/pi/ROBOT-CAR/ros_connect/install" TYPE PROGRAM FILES "/home/pi/ROBOT-CAR/ros_connect/build/catkin_generated/installspace/_setup_util.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pi/ros_connect/install/env.sh")
+   "/home/pi/ROBOT-CAR/ros_connect/install/env.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pi/ros_connect/install" TYPE PROGRAM FILES "/home/pi/ros_connect/build/catkin_generated/installspace/env.sh")
+file(INSTALL DESTINATION "/home/pi/ROBOT-CAR/ros_connect/install" TYPE PROGRAM FILES "/home/pi/ROBOT-CAR/ros_connect/build/catkin_generated/installspace/env.sh")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pi/ros_connect/install/setup.bash;/home/pi/ros_connect/install/local_setup.bash")
+   "/home/pi/ROBOT-CAR/ros_connect/install/setup.bash;/home/pi/ROBOT-CAR/ros_connect/install/local_setup.bash")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pi/ros_connect/install" TYPE FILE FILES
-    "/home/pi/ros_connect/build/catkin_generated/installspace/setup.bash"
-    "/home/pi/ros_connect/build/catkin_generated/installspace/local_setup.bash"
+file(INSTALL DESTINATION "/home/pi/ROBOT-CAR/ros_connect/install" TYPE FILE FILES
+    "/home/pi/ROBOT-CAR/ros_connect/build/catkin_generated/installspace/setup.bash"
+    "/home/pi/ROBOT-CAR/ros_connect/build/catkin_generated/installspace/local_setup.bash"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pi/ros_connect/install/setup.sh;/home/pi/ros_connect/install/local_setup.sh")
+   "/home/pi/ROBOT-CAR/ros_connect/install/setup.sh;/home/pi/ROBOT-CAR/ros_connect/install/local_setup.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pi/ros_connect/install" TYPE FILE FILES
-    "/home/pi/ros_connect/build/catkin_generated/installspace/setup.sh"
-    "/home/pi/ros_connect/build/catkin_generated/installspace/local_setup.sh"
+file(INSTALL DESTINATION "/home/pi/ROBOT-CAR/ros_connect/install" TYPE FILE FILES
+    "/home/pi/ROBOT-CAR/ros_connect/build/catkin_generated/installspace/setup.sh"
+    "/home/pi/ROBOT-CAR/ros_connect/build/catkin_generated/installspace/local_setup.sh"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pi/ros_connect/install/setup.zsh;/home/pi/ros_connect/install/local_setup.zsh")
+   "/home/pi/ROBOT-CAR/ros_connect/install/setup.zsh;/home/pi/ROBOT-CAR/ros_connect/install/local_setup.zsh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pi/ros_connect/install" TYPE FILE FILES
-    "/home/pi/ros_connect/build/catkin_generated/installspace/setup.zsh"
-    "/home/pi/ros_connect/build/catkin_generated/installspace/local_setup.zsh"
+file(INSTALL DESTINATION "/home/pi/ROBOT-CAR/ros_connect/install" TYPE FILE FILES
+    "/home/pi/ROBOT-CAR/ros_connect/build/catkin_generated/installspace/setup.zsh"
+    "/home/pi/ROBOT-CAR/ros_connect/build/catkin_generated/installspace/local_setup.zsh"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pi/ros_connect/install/.rosinstall")
+   "/home/pi/ROBOT-CAR/ros_connect/install/.rosinstall")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pi/ros_connect/install" TYPE FILE FILES "/home/pi/ros_connect/build/catkin_generated/installspace/.rosinstall")
+file(INSTALL DESTINATION "/home/pi/ROBOT-CAR/ros_connect/install" TYPE FILE FILES "/home/pi/ROBOT-CAR/ros_connect/build/catkin_generated/installspace/.rosinstall")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/pi/ros_connect/build/gtest/cmake_install.cmake")
-  include("/home/pi/ros_connect/build/robot_control/cmake_install.cmake")
-  include("/home/pi/ros_connect/build/udp_server/cmake_install.cmake")
+  include("/home/pi/ROBOT-CAR/ros_connect/build/gtest/cmake_install.cmake")
+  include("/home/pi/ROBOT-CAR/ros_connect/build/robot_control/cmake_install.cmake")
+  include("/home/pi/ROBOT-CAR/ros_connect/build/udp_server/cmake_install.cmake")
 
 endif()
 
@@ -144,5 +144,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pi/ros_connect/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pi/ROBOT-CAR/ros_connect/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

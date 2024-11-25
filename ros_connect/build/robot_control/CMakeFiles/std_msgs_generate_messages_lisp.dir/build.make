@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/pi/ros_connect/src
+CMAKE_SOURCE_DIR = /home/pi/ROBOT-CAR/ros_connect/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/pi/ros_connect/build
+CMAKE_BINARY_DIR = /home/pi/ROBOT-CAR/ros_connect/build
 
 # Utility rule file for std_msgs_generate_messages_lisp.
 
@@ -63,10 +63,10 @@ robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/build: std_msgs_gen
 .PHONY : robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 
 robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean:
-	cd /home/pi/ros_connect/build/robot_control && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_lisp.dir/cmake_clean.cmake
+	cd /home/pi/ROBOT-CAR/ros_connect/build/robot_control && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_lisp.dir/cmake_clean.cmake
 .PHONY : robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
 
 robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/depend:
-	cd /home/pi/ros_connect/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/ros_connect/src /home/pi/ros_connect/src/robot_control /home/pi/ros_connect/build /home/pi/ros_connect/build/robot_control /home/pi/ros_connect/build/robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/pi/ROBOT-CAR/ros_connect/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/pi/ROBOT-CAR/ros_connect/src /home/pi/ROBOT-CAR/ros_connect/src/robot_control /home/pi/ROBOT-CAR/ros_connect/build /home/pi/ROBOT-CAR/ros_connect/build/robot_control /home/pi/ROBOT-CAR/ros_connect/build/robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : robot_control/CMakeFiles/std_msgs_generate_messages_lisp.dir/depend
 

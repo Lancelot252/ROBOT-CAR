@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/pi/ros_connect/devel/lib/udp_server/udp_server_node"
-  "/home/pi/ros_connect/devel/lib/udp_server/udp_server_node.pdb"
+  "/home/pi/ROBOT-CAR/ros_connect/devel/lib/udp_server/udp_server_node"
+  "/home/pi/ROBOT-CAR/ros_connect/devel/lib/udp_server/udp_server_node.pdb"
   "CMakeFiles/udp_server_node.dir/src/udp_server.cpp.o"
 )
 

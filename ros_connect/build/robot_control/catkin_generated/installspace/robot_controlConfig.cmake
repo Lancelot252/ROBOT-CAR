@@ -67,14 +67,14 @@ set(robot_control_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(robot_control_SOURCE_PREFIX /home/pi/ros_connect/src/robot_control)
-  set(robot_control_DEVEL_PREFIX /home/pi/ros_connect/devel)
+  set(robot_control_SOURCE_PREFIX /home/pi/ROBOT-CAR/ros_connect/src/robot_control)
+  set(robot_control_DEVEL_PREFIX /home/pi/ROBOT-CAR/ros_connect/devel)
   set(robot_control_INSTALL_PREFIX "")
   set(robot_control_PREFIX ${robot_control_DEVEL_PREFIX})
 else()
   set(robot_control_SOURCE_PREFIX "")
   set(robot_control_DEVEL_PREFIX "")
-  set(robot_control_INSTALL_PREFIX /home/pi/ros_connect/install)
+  set(robot_control_INSTALL_PREFIX /home/pi/ROBOT-CAR/ros_connect/install)
   set(robot_control_PREFIX ${robot_control_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/pi/ros_connect/install/lib;/home/pi/ros_connect/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/pi/ROBOT-CAR/ros_connect/install/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

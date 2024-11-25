@@ -1,4 +1,4 @@
-prefix=/home/pi/ros_connect/devel
+prefix=/home/pi/ROBOT-CAR/ros_connect/devel
 
 Name: udp_server
 Description: Description of udp_server

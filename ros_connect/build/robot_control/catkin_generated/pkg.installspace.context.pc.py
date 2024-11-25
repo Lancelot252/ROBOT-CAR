@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "robot_control"
-PROJECT_SPACE_DIR = "/home/pi/ros_connect/install"
+PROJECT_SPACE_DIR = "/home/pi/ROBOT-CAR/ros_connect/install"
 PROJECT_VERSION = "0.0.0"

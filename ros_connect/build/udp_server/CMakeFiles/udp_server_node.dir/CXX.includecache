@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/pi/ros_connect/src/udp_server/src/udp_server.cpp
+/home/pi/ROBOT-CAR/ros_connect/src/udp_server/src/udp_server.cpp
 ros/ros.h
 -
 std_msgs/String.h

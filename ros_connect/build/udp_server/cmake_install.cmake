@@ -1,8 +1,8 @@
-# Install script for directory: /home/pi/ros_connect/src/udp_server
+# Install script for directory: /home/pi/ROBOT-CAR/ros_connect/src/udp_server
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/pi/ros_connect/install")
+  set(CMAKE_INSTALL_PREFIX "/home/pi/ROBOT-CAR/ros_connect/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/pi/ros_connect/build/udp_server/catkin_generated/installspace/udp_server.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/pi/ROBOT-CAR/ros_connect/build/udp_server/catkin_generated/installspace/udp_server.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/udp_server/cmake" TYPE FILE FILES
-    "/home/pi/ros_connect/build/udp_server/catkin_generated/installspace/udp_serverConfig.cmake"
-    "/home/pi/ros_connect/build/udp_server/catkin_generated/installspace/udp_serverConfig-version.cmake"
+    "/home/pi/ROBOT-CAR/ros_connect/build/udp_server/catkin_generated/installspace/udp_serverConfig.cmake"
+    "/home/pi/ROBOT-CAR/ros_connect/build/udp_server/catkin_generated/installspace/udp_serverConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/udp_server" TYPE FILE FILES "/home/pi/ros_connect/src/udp_server/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/udp_server" TYPE FILE FILES "/home/pi/ROBOT-CAR/ros_connect/src/udp_server/package.xml")
 endif()
 

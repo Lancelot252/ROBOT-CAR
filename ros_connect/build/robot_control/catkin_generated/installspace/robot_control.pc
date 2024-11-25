@@ -1,4 +1,4 @@
-prefix=/home/pi/ros_connect/install
+prefix=/home/pi/ROBOT-CAR/ros_connect/install
 
 Name: robot_control
 Description: Description of robot_control

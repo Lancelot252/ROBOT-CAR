@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/pi/ros_connect/devel/setup.sh
+    local-name: /home/pi/ROBOT-CAR/ros_connect/devel/setup.sh
