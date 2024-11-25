@@ -115,7 +115,7 @@ class RobotCarMode{
         //     }
         // }
 
-        void joyNodeHandler(const sensor_msgs::Joy::ConstPtr& msg){
+        void joyNodeHandler(const string& msg){
 	
             std::cout << "carmode::joyhandler" << "\n";
             //Vx = msg->axes[0]; // left rocker, horizontal, from left to rihgt [1 -1]
@@ -123,7 +123,7 @@ class RobotCarMode{
             //w = msg->axes[2]; // right rocker, horizontal, from left to right [1 -1]
 
 	    //start
-	        if(msg.data == "forward"){
+	    if(msg.data == "forward"){
                 Vx=0.5;
             }else if(msg.data == "backward"){
                 Vx=-0.5;
