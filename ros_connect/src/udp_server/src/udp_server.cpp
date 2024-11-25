@@ -3,7 +3,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cstring>
 #include <thread>
 #include <boost/asio.hpp>
 #include <jsoncpp/json/json.h>  // JsonCpp库
@@ -116,13 +115,13 @@ void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
                     std::string errs;
                     std::istringstream requestStream(jsonStr);
                     if (!Json::parseFromStream(readerBuilder, requestStream, &root, &errs)) {
-                        ROS_WARN_STREAM("Failed to parse JSON: " << errs);
+                        ROS_WARN_STREAM("Failed to parse JSON: " << errs);//错误信息：无法解析 JSON
                     } else {
                         // 输出解析后的 JSON
                         ROS_INFO_STREAM("Parsed JSON: " << root.toStyledString());
 
                         // 根据请求发布ROS话题
-                        if (root["method"] == "SetMovementAngle") {
+                        if (root["method"] == "SetMovementAngle") {//水平移动
                             int angle = root["params"][0].asInt();
                             std_msgs::String msg;
                             switch (angle) {
@@ -148,7 +147,7 @@ void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
                             publisher.publish(msg);
                             ROS_INFO("Published movement command: %s", msg.data);
                         }
-                        if(root["method"]=="SetBrushMotor"){
+                        if(root["method"]=="SetBrushMotor"){//水平旋转
                             std_msgs::String msg;
                             int angle = root["params"][1].asInt();
                             ROS_INFO("%d",angle);
@@ -184,7 +183,7 @@ void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
             }
         }
     } catch (std::exception& e) {
-        ROS_ERROR_STREAM("Error starting JSON-RPC server: " << e.what());
+        ROS_ERROR_STREAM("Error starting JSON-RPC server: " << e.what());//输出错误信息
     }
 }
 
