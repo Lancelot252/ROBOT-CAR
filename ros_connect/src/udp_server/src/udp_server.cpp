@@ -29,12 +29,55 @@ std::string getCpuSerialNumber() {
     return serial_num;
 }
 
-// UDP设备发现线程函数
-void udpDeviceDiscovery(int port, const std::string& robot_type, const std::string& serial_number) {
-    int udp_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    if (udp_sockfd < 0) {
-        ROS_ERROR("Failed to create UDP socket!");
-        return;
+// 处理接收到的命令并发布 ROS 话题
+void handleCommand(const std::string& requestBody, ros::Publisher& publisher) {
+    try {
+        nlohmann::json jsonObj = nlohmann::json::parse(requestBody);
+        std::string method = jsonObj["method"];
+        int id = jsonObj["id"];
+        nlohmann::json params = jsonObj["params"];
+
+        std_msgs::String msg;
+        //msg.data = jsonObj.dump();  // 将 JSON 对象转换为字符串
+
+        if (method == "SetMovementAngle")
+        {
+            switch (params[0])
+            {
+            case 90://前进
+                msg.data = "forward";
+                ROS_INFO("forward");
+                break;
+            
+            case 270://后退
+                msg.data = "backward";
+                ROS_INFO("backward");
+                break;
+
+            case 180://左转
+                msg.data = "left";
+                ROS_INFO("left");
+                break;
+
+            case 360://右转
+                msg.data = "right";
+                ROS_INFO("right");
+                break;
+
+            case -1://停止
+                msg.data = "stop";
+                ROS_INFO("stop");
+                break;
+            
+            default:
+                break;
+            }
+        }
+        
+
+        publisher.publish(msg);  // 发布 ROS 话题
+    } catch (const std::exception& e) {
+        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
     }
 
     struct sockaddr_in server_addr, client_addr;
@@ -70,7 +113,6 @@ void udpDeviceDiscovery(int port, const std::string& robot_type, const std::stri
     close(udp_sockfd);
 }
 
-
 // 处理 JSON-RPC 请求
 void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
     try {
@@ -101,66 +143,81 @@ void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
                 // 打印接收到的原始数据
                 ROS_INFO_STREAM("Raw data received: " << request);
 
-                // 查找JSON部分的开始和结束位置
-                size_t jsonStartPos = request.find("{");
-                size_t jsonEndPos = request.rfind("}");
+                // 解析 JSON
+                // Json::Value root;
+                // Json::CharReaderBuilder readerBuilder;
+                // std::string errs;
+                // std::istringstream requestStream(request);
+                // if (!Json::parseFromStream(readerBuilder, requestStream, &root, &errs)) {
+                //     ROS_WARN_STREAM("Failed to parse JSON: " << errs);
+                //     continue;
+                // }
 
-                if (jsonStartPos != std::string::npos && jsonEndPos != std::string::npos) {
-                    // 截取 JSON 字符串
-                    std::string jsonStr = request.substr(jsonStartPos, jsonEndPos - jsonStartPos + 1);
-                    ROS_INFO("Extracted JSON: %s", jsonStr.c_str());
-                    
-                    // 解析 JSON
-                    Json::Value root;
-                    Json::CharReaderBuilder readerBuilder;
-                    std::string errs;
-                    std::istringstream requestStream(jsonStr);
-                    if (!Json::parseFromStream(readerBuilder, requestStream, &root, &errs)) {
-                        ROS_WARN_STREAM("Failed to parse JSON: " << errs);
-                    } else {
-                        // 输出解析后的 JSON
-                        ROS_INFO_STREAM("Parsed JSON: " << root.toStyledString());
+                void parseJsonRequest(const std::string& request) {
+                // 找到 JSON 数据的起始和结束位置
+    size_t jsonStartPos = request.find("{");
+    size_t jsonEndPos = request.rfind("}");
 
-                        // 根据请求发布ROS话题
-                        if (root["method"] == "SetMovementAngle") {
-                            int angle = root["params"][0].asInt();
-                            std_msgs::String msg;
-                            switch (angle) {
-                                case 90:
-                                    msg.data = "forward";
-                                    break;
-                                case 270:
-                                    msg.data = "backward";
-                                    break;
-                                case 180:
-                                    msg.data = "left";
-                                    break;
-                                case 360:
-                                    msg.data = "right";
-                                    break;
-                                case -1:
-                                    msg.data = "stop";
-                                    break;
-                                default:
-                                    msg.data = "unknown";
-                            }
-                            publisher.publish(msg);
-                            ROS_INFO("Published movement command: %s", msg.data.c_str());
-                        }
+    if (jsonStartPos != std::string::npos && jsonEndPos != std::string::npos) {
+        // 截取 JSON 字符串
+        std::string jsonStr = request.substr(jsonStartPos, jsonEndPos - jsonStartPos + 1);
 
-                        // 返回 JSON-RPC 响应
-                        Json::Value response;
-                        response["jsonrpc"] = "2.0";
-                        response["id"] = root["id"];
-                        response["result"] = "Success";
+        // 解析 JSON
+        Json::Value root;
+        Json::CharReaderBuilder readerBuilder;
+        std::string errs;
+        std::istringstream requestStream(jsonStr);
+        if (!Json::parseFromStream(readerBuilder, requestStream, &root, &errs)) {
+            ROS_WARN_STREAM("Failed to parse JSON: " << errs);
+        } else {
+            // 输出解析后的 JSON
+            ROS_INFO_STREAM("Parsed JSON: " << root);
+        }
+    } else {
+        ROS_WARN_STREAM("No valid JSON found in the request.");
+    }
+}
 
-                        std::string responseStr = response.toStyledString();
-                        boost::asio::write(socket, boost::asio::buffer(responseStr + "\n"));
+
+
+                // 打印接收到的 JSON-RPC 请求
+                ROS_INFO_STREAM("Received JSON-RPC Request: " << root.toStyledString());
+
+                // 根据请求发布ROS话题
+                if (root["method"] == "SetMovementAngle") {
+                    int angle = root["params"][0].asInt();
+                    std_msgs::String msg;
+                    switch (angle) {
+                        case 90:
+                            msg.data = "forward";
+                            break;
+                        case 270:
+                            msg.data = "backward";
+                            break;
+                        case 180:
+                            msg.data = "left";
+                            break;
+                        case 360:
+                            msg.data = "right";
+                            break;
+                        case -1:
+                            msg.data = "stop";
+                            break;
+                        default:
+                            msg.data = "unknown";
                     }
-                } else {
-                    ROS_WARN_STREAM("No valid JSON found in the request.");
+                    publisher.publish(msg);
+                    ROS_INFO("Published movement command: %s", msg.data.c_str());
                 }
 
+                // 返回 JSON-RPC 响应
+                Json::Value response;
+                response["jsonrpc"] = "2.0";
+                response["id"] = root["id"];
+                response["result"] = "Success";
+
+                std::string responseStr = response.toStyledString();
+                boost::asio::write(socket, boost::asio::buffer(responseStr + "\n"));
             } catch (std::exception& e) {
                 ROS_ERROR_STREAM("Error handling JSON-RPC request: " << e.what());
             }
@@ -169,6 +226,7 @@ void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
         ROS_ERROR_STREAM("Error starting JSON-RPC server: " << e.what());
     }
 }
+
 
 int main(int argc, char** argv) {
     // 初始化 ROS
