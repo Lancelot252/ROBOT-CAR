@@ -29,12 +29,64 @@ std::string getCpuSerialNumber() {
     return serial_num;
 }
 
+<<<<<<< HEAD
 // UDP设备发现线程函数
 void udpDeviceDiscovery(int port, const std::string& robot_type, const std::string& serial_number) {
     int udp_sockfd = socket(AF_INET, SOCK_DGRAM, 0);
     if (udp_sockfd < 0) {
         ROS_ERROR("Failed to create UDP socket!");
         return;
+=======
+// 处理接收到的命令并发布 ROS 话题
+void handleCommand(const std::string& requestBody, ros::Publisher& publisher) {
+    try {
+        nlohmann::json jsonObj = nlohmann::json::parse(requestBody);
+        std::string method = jsonObj["method"];
+        int id = jsonObj["id"];
+        nlohmann::json params = jsonObj["params"];
+
+        std_msgs::String msg;
+        //msg.data = jsonObj.dump();  // 将 JSON 对象转换为字符串
+
+        if (method == "SetMovementAngle")
+        {
+            switch (params[0])
+            {
+            case 90://前进
+                msg.data = "forward";
+                ROS_INFO("forward");
+                break;
+            
+            case 270://后退
+                msg.data = "backward";
+                ROS_INFO("backward");
+                break;
+
+            case 180://左转
+                msg.data = "left";
+                ROS_INFO("left");
+                break;
+
+            case 360://右转
+                msg.data = "right";
+                ROS_INFO("right");
+                break;
+
+            case -1://停止
+                msg.data = "stop";
+                ROS_INFO("stop");
+                break;
+            
+            default:
+                break;
+            }
+        }
+        
+
+        publisher.publish(msg);  // 发布 ROS 话题
+    } catch (const std::exception& e) {
+        std::cerr << "Error parsing JSON: " << e.what() << std::endl;
+>>>>>>> 3166f4209612659dd84f433e88b8d4367ff7a7e3
     }
 
     struct sockaddr_in server_addr, client_addr;
