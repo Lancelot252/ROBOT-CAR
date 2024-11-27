@@ -37,3 +37,32 @@
    - 参数:
      - `argc`: 命令行参数的数量。
      - `argv`: 命令行参数的数组。
+
+#### 使用的函数库
+- **ROS**: 用于机器人操作系统的通信和日志记录。
+- **std_msgs**: 用于ROS标准消息类型。
+- **iostream**: 用于标准输入输出流操作。
+- **fstream**: 用于文件输入输出流操作。
+- **string**: 用于字符串操作。
+- **thread**: 用于多线程操作。
+- **boost::asio**: 用于网络编程（TCP和UDP）。
+- **jsoncpp**: 用于JSON数据解析和生成。
+- **arpa/inet.h**: 用于网络地址操作（如socket编程）。
+
+### CMakeLists.txt
+`CMakeLists.txt` 文件包含以下主要配置：
+
+1. **项目初始化**:
+   - 设置CMake的最低版本要求，并定义项目名称。
+   - 使用C++11标准进行编译，并添加jsoncpp库。
+
+2. **查找catkin包和系统依赖**:
+   - 查找ROS所需的catkin包（如roscpp、rospy、std_msgs）。
+   - 查找jsoncpp库。
+
+3. **包含目录**:
+   - 指定头文件的搜索路径，包括catkin和jsoncpp的头文件目录。
+
+4. **生成可执行文件**:
+   - 定义可执行文件`udp_server_node`和`udp_server`，并链接所需的库（如catkin和jsoncpp）。
+
