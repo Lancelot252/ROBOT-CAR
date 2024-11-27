@@ -151,17 +151,17 @@ class RobotCarMode{
             if (msg->data == "stop"){
                 next_command = COMMAND::STOP;
             }
-            // else if (BUTTON_Y){
-            //     next_command = COMMAND::SPEED_MODE_1;
-            // }
-            // else if (BUTTON_A){
-            //     //next_command = COMMAND::SPEED_MODE_5;
-            //     next_command = COMMAND::SPEED_UP;//new
-            // }
-            // else if (BUTTON_B){
-            //     //next_command = COMMAND::SPEED_MODE_15;
-            //     next_command = COMMAND::SPEED_DOWN;//new
-            // }
+            else if (msg->data == "slow"){
+                next_command = COMMAND::SPEED_MODE_1;
+            }
+            else if (msg->data == "medium"){
+                next_command = COMMAND::SPEED_MODE_5;
+                //next_command = COMMAND::SPEED_UP;//new
+            }
+            else if (msg->data == "fast"){
+                next_command = COMMAND::SPEED_MODE_15;
+                //next_command = COMMAND::SPEED_DOWN;//new
+            }
 	    /*(else if (BUTTON_L1){
 		std::cout<<"向左1cm"<<std::endl;
                 m_robotCar.xyw2wheel_1(1,0,0);
