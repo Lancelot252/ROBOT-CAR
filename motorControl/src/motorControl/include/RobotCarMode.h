@@ -117,7 +117,7 @@ class RobotCarMode{
         void joyNodeHandler(const std_msgs::String::ConstPtr& msg){
 	
             std::cout << "carmode::joyhandler" << "\n";
-            ROS_INFO("Received message: %s", msg->data);
+            std::cout << "msg: " << msg->data << "\n";
             //Vx = msg->axes[0]; // left rocker, horizontal, from left to rihgt [1 -1]
             //Vy = msg->axes[1]; // left rocker, vertial, form top to bottom [1 -1]
             //w = msg->axes[2]; // right rocker, horizontal, from left to right [1 -1]
