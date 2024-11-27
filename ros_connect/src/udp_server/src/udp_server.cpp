@@ -164,7 +164,23 @@ void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
                             publisher.publish(msg);
                             ROS_INFO("Published movement command: %s", msg.data);
                         }
-
+                        if(root["method"]=="SetPWMServo"){
+                            std_msgs::String msg;
+                            double speed_percent = (root["params"][3].asInt()+90)/180.0;
+                            double speed = speed_percent*15;
+                            ROS_INFO("%.2lf",speed);
+                            if(speed==0){
+                                msg.data = "stop";
+                            }else if(speed>0&&speed<=5){
+                                msg.data = "slow";
+                            }else if(speed>5&&speed<=10){
+                                msg.data = "medium";
+                            }else if(speed>10&&speed<=15){
+                                msg.data = "fast";
+                            }
+                            publisher.publish(msg);
+                            ROS_INFO("Published movement command: %s", msg.data.c_str());
+                        }
                         // 返回 JSON-RPC 响应
                         Json::Value response;
                         response["jsonrpc"] = "2.0";
