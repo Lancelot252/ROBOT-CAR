@@ -1,0 +1,8 @@
+prefix=/home/pi/SmartCar_Dir/SmartCar_1.1_beta/motorControl/devel
+
+Name: motorControl
+Description: Description of motorControl
+Version: 0.1.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
