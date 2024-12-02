@@ -117,7 +117,8 @@ class RobotCarMode{
         void joyNodeHandler(const std_msgs::String::ConstPtr& msg){
 	
             std::cout << "carmode::joyhandler" << "\n";
-            std::cout << "msg: " << msg->data << "\n";
+            // ROS_INFO("Received message: %s", msg->data);
+            std::cout<<"msg: "<<msg->data<<"\n";
             //Vx = msg->axes[0]; // left rocker, horizontal, from left to rihgt [1 -1]
             //Vy = msg->axes[1]; // left rocker, vertial, form top to bottom [1 -1]
             //w = msg->axes[2]; // right rocker, horizontal, from left to right [1 -1]
@@ -152,13 +153,16 @@ class RobotCarMode{
                 next_command = COMMAND::STOP;
             }
             else if (msg->data == "slow"){
+                std::cout<<"slow\n";
                 next_command = COMMAND::SPEED_MODE_1;
             }
             else if (msg->data == "medium"){
+                std::cout<<"medium\n";
                 next_command = COMMAND::SPEED_MODE_5;
                 //next_command = COMMAND::SPEED_UP;//new
             }
             else if (msg->data == "fast"){
+                std::cout<<"fast\n";
                 next_command = COMMAND::SPEED_MODE_15;
                 //next_command = COMMAND::SPEED_DOWN;//new
             }

@@ -1,4 +1,4 @@
-prefix=/home/pi/SmartCar_Dir/SmartCar_1.1_beta/motorControl/devel
+prefix=/home/pi/ROBOT-CAR/motorControl/devel
 
 Name: motorControl
 Description: Description of motorControl
