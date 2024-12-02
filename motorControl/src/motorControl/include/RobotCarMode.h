@@ -236,14 +236,14 @@ class RobotCarMode{
             }
             else if(next_command == COMMAND::SPEED_MODE_1)
             {
-                m_robotCar.robotChangeSpeed(1.8);
-                std::cout << "change speed 1" << "\n";
+                m_robotCar.robotChangeSpeed(2);
+                std::cout << "change speed 2" << "\n";
                     
             }
             else if(next_command == COMMAND::SPEED_MODE_5)
             {
-                m_robotCar.robotChangeSpeed(3.6);
-                std::cout << "change speed 3.6" << "\n";
+                m_robotCar.robotChangeSpeed(7.5);
+                std::cout << "change speed 7.5" << "\n";
             }
             else if(next_command == COMMAND::SPEED_MODE_15)
             {
