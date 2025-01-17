@@ -1,2 +1,2 @@
-robot_control:udp_server
+mjpeg_server_node:robot_control:udp_server
 -DCATKIN_DEVEL_PREFIX=/home/pi/ROBOT-CAR/ros_connect/devel -DCMAKE_INSTALL_PREFIX=/home/pi/ROBOT-CAR/ros_connect/install -G Unix Makefiles

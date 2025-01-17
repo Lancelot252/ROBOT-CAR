@@ -132,6 +132,7 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/pi/ROBOT-CAR/ros_connect/build/gtest/cmake_install.cmake")
   include("/home/pi/ROBOT-CAR/ros_connect/build/robot_control/cmake_install.cmake")
+  include("/home/pi/ROBOT-CAR/ros_connect/build/mjpeg_server_node/cmake_install.cmake")
   include("/home/pi/ROBOT-CAR/ros_connect/build/udp_server/cmake_install.cmake")
 
 endif()

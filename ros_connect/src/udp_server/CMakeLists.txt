@@ -11,9 +11,14 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  sensor_msgs
+  image_transport
+  cv_bridge
 )
 
 find_package(jsoncpp REQUIRED)
+find_package(OpenCV REQUIRED)
+
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -121,6 +126,7 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
   ${jsoncpp_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
 )
 
 
@@ -220,4 +226,4 @@ target_link_libraries(udp_server_node
 # catkin_add_nosetests(test)
 
 add_executable(udp_server src/udp_server.cpp)
-target_link_libraries(udp_server ${catkin_LIBRARIES} /usr/lib/aarch64-linux-gnu/libjsoncpp.so)
+target_link_libraries(udp_server ${catkin_LIBRARIES} ${OpenCV_LIBRARIES} /usr/lib/aarch64-linux-gnu/libjsoncpp.so)

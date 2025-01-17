@@ -1,0 +1,8 @@
+prefix=/home/pi/ROBOT-CAR/ros_connect/devel
+
+Name: jpeg_server
+Description: Description of jpeg_server
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -7,8 +7,76 @@
 #include <boost/asio.hpp>
 #include <jsoncpp/json/json.h>  // JsonCpp库
 #include <arpa/inet.h>
-
+#include <sensor_msgs/Image.h>
+#include <cv_bridge/cv_bridge.h>
+#include <image_transport/image_transport.h>
+#include <opencv2/opencv.hpp>
+// 移除 #include <http_server_cpp/server.hpp>
 using boost::asio::ip::tcp;
+cv::Mat current_image;  // 存储当前图像帧
+std::mutex image_mutex;
+// 图像回调函数
+void imageCallback(const sensor_msgs::ImageConstPtr& msg)
+{
+    std::lock_guard<std::mutex> lock(image_mutex);
+    try
+    {
+        
+        // 将ROS图像消息转换为OpenCV图像
+        cv_bridge::CvImagePtr cv_ptr = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+        current_image = cv_ptr->image;  // 更新���局图像帧
+    }
+    catch (cv_bridge::Exception& e)
+    {
+        ROS_ERROR("Could not convert image: %s", e.what());
+    }
+}
+
+// 添加HTTP服务器处理函数
+void httpServer(int port) {
+    try {
+        boost::asio::io_service io_service;
+
+        // 创建接受器，监听指定端口
+        boost::asio::ip::tcp::acceptor acceptor(io_service,
+        boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), port));
+        ROS_INFO("MJPEG Server started on port %d", port);
+        while (ros::ok()) {
+            boost::asio::ip::tcp::socket socket(io_service);
+            acceptor.accept(socket);
+
+            // 创建HTTP响应头
+            std::string header = "HTTP/1.1 200 OK\r\n"
+                                 "Content-Type: multipart/x-mixed-replace; boundary=--boundarydonotcross\r\n"
+                                 "\r\n";
+
+            boost::asio::write(socket, boost::asio::buffer(header));
+
+            while (ros::ok()) {
+                std::cout<<"-------while success----------"<<std::endl;
+                if (!current_image.empty()) {
+                    std::cout<<"-------if success----------"<<std::endl;
+                    std::vector<uchar> buffer;
+                    cv::imencode(".jpg", current_image, buffer);
+
+                    std::ostringstream oss;
+                    oss << "--boundarydonotcross\r\n"
+                        << "Content-Type: image/jpeg\r\n"
+                        << "Content-Length: " << buffer.size() << "\r\n\r\n";
+
+                    boost::asio::write(socket, boost::asio::buffer(oss.str()));
+                    boost::asio::write(socket, boost::asio::buffer(buffer));
+
+                    
+                    // 等待一段时间再发送下一帧
+                    std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                }
+            }
+        }
+    } catch (std::exception& e) {
+        ROS_ERROR_STREAM("HTTP server error: " << e.what());
+    }
+}
 
 // 获取CPU序列号
 std::string getCpuSerialNumber() {
@@ -97,7 +165,7 @@ void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
                 std::istream input(&buffer);
                 std::string request((std::istreambuf_iterator<char>(input)), std::istreambuf_iterator<char>());
 
-                // 打印接收到的原始数据
+                // 打���接收到的原始数据
                 ROS_INFO_STREAM("Raw data received: " << request);
 
                 // 查找JSON部分的开始和结束位置
@@ -147,7 +215,7 @@ void handleJsonRpcRequests(int tcp_port, ros::Publisher& publisher) {
                             publisher.publish(msg);
                             ROS_INFO("Published movement command: %s", msg.data);
                         }
-                        if(root["method"]=="SetBrushMotor"){//水平旋转
+                        if(root["method"]=="SetBrushMotor"){//水平旋��
                             std_msgs::String msg;
                             int angle = root["params"][1].asInt();
                             ROS_INFO("%d",angle);
@@ -218,11 +286,22 @@ int main(int argc, char** argv) {
     // 启动 UDP 设备发现线程
     std::thread udp_thread(udpDeviceDiscovery, 9027, robot_type, serial_number);
 
+   // 创建图像订阅者
+    image_transport::ImageTransport it(nh);
+    image_transport::Subscriber img_sub = it.subscribe("/rgb", 1, imageCallback);
+
+    // 启动HTTP服务器线程
+    std::thread http_thread(httpServer, 8080);
+
     // 主线程处理 JSON-RPC 请求
     handleJsonRpcRequests(9030, publisher);
-
+    
+    ros::spin();
     // 等待 UDP 线程结束
     udp_thread.join();
+
+    // 等待HTTP线程结束
+    http_thread.join();
 
     return 0;
 }
