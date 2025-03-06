@@ -319,7 +319,7 @@
    2. 进入 `motorControl` 目录并设置环境变量：
       ```bash
       cd motorControl
-      source devel/setup.bash
+      bash devel/setup.sh
       ```
 
    3. 启动 `carControlNode`：
