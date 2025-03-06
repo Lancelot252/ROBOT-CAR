@@ -285,3 +285,44 @@
 4. **生成可执行文件**:
    - 定义可执行文件`udp_server_node`和`udp_server`，并链接所需的库（如catkin和jsoncpp）。
 
+## 启动指南
+### 启动server
+
+1. 打开终端并进入项目目录：
+   ```bash
+   cd /home/pi/ROBOT-CAR
+   ```
+
+2. 进入 `ros_connect` 目录并设置环境变量：
+   ```bash
+   cd ros_connect
+   source devel/setup.bash
+   ```
+
+3. 启动 `mjpeg_server_node`：
+   ```bash
+   rosrun mjpeg_server_node mjpeg_server_node
+   ```
+
+4. 启动 `udp_server_node`：
+   ```bash
+   rosrun udp_server udp_server_node
+   ```
+
+### 启动 motorControl
+
+   1. 打开终端并进入项目目录：
+      ```bash
+      cd /home/pi/ROBOT-CAR
+      ```
+
+   2. 进入 `motorControl` 目录并设置环境变量：
+      ```bash
+      cd motorControl
+      source devel/setup.bash
+      ```
+
+   3. 启动 `carControlNode`：
+      ```bash
+      rosrun carControlNode carControlNode
+      ```
