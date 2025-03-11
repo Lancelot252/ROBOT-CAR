@@ -1,2 +1,0 @@
-jpeg_server
--DCATKIN_DEVEL_PREFIX=/home/pi/ROBOT-CAR/jpeg_server/devel -DCMAKE_INSTALL_PREFIX=/home/pi/ROBOT-CAR/jpeg_server/install -G Unix Makefiles

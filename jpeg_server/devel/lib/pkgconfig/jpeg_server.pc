@@ -1,8 +1,0 @@
-prefix=/home/pi/ROBOT-CAR/jpeg_server/devel
-
-Name: jpeg_server
-Description: Description of jpeg_server
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
