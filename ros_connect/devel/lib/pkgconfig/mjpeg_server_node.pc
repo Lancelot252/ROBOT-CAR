@@ -1,8 +1,0 @@
-prefix=/home/pi/ROBOT-CAR/ros_connect/devel
-
-Name: mjpeg_server_node
-Description: Description of mjpeg_server_node
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
